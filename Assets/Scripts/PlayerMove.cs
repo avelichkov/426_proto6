@@ -6,6 +6,8 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float _speed;
     private Rigidbody2D _rb; // Reference to the Rigidbody2D (for 2D games)
+    public Weapon currentWeapon;
+    public Transform firePoint;
 
     void Awake()
     {
@@ -16,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        HandleShooting();
     }
 
     void MovePlayer()
@@ -29,5 +32,20 @@ public class PlayerMove : MonoBehaviour
 
         // Apply movement to the Rigidbody2D
         _rb.velocity = moveDirection * _speed;
+    }
+     void HandleShooting()
+    {
+        if (currentWeapon == null) return;
+
+        if (Input.GetButtonDown("Fire1") && currentWeapon.CanShoot())
+        {
+            currentWeapon.Shoot();
+        }
+    }
+
+    public void UpgradeWeapon(Weapon newWeapon)
+    {
+        currentWeapon = newWeapon;
+        
     }
 }
