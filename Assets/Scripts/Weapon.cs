@@ -104,5 +104,10 @@ public class Weapon : MonoBehaviour
         int randomIndex = Random.Range(0, weaponDataList.Count);
         currentWeaponData = weaponDataList[randomIndex];
     }
-    
+
+    private WeaponData GenerateWeapon()
+    {
+        WeaponData weapon = new WeaponData();
+        return weapon;
+    }
 }
