@@ -1,29 +1,38 @@
-using System.Collections.Generic; // Include for List
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     public List<WeaponData> weaponDataList; // List of weapon data
-    private int currentWeaponIndex = 0; // Track the currently equipped weapon
-    private int currentAmmo; // Current ammo count
-    private bool isReloading = false; // Reloading status
-    public Transform firePoint; // Point from where bullets will be fired
-
+    private WeaponData currentWeaponData;   // Current weapon data being used
+    private int currentAmmo;                // Current ammo count
+    private bool isReloading = false;       // Reloading status
+    public Transform firePoint;             // Point from where bullets will be fired
+    public string CurrentWeaponName => currentWeaponData.weaponName; // Assuming weaponData has a weaponName field
+    public int CurrentAmmo => currentAmmo; 
     void Start()
     {
+        // Initialize with a random weapon from the list
+        SelectRandomWeapon();
         InitializeWeapon();
     }
 
     void InitializeWeapon()
     {
-        // Initialize the current weapon's ammo count from the weapon data list
-        currentAmmo = weaponDataList[currentWeaponIndex].maxAmmo;
+        // Set the current ammo count from the weapon data
+        currentAmmo = currentWeaponData.maxAmmo;
     }
 
     public bool CanShoot()
     {
-        return !isReloading && currentAmmo > 0; // Check if can shoot
+        return !isReloading && currentAmmo > 0;
     }
+    public void AddAmmo(int amount)
+{
+    currentAmmo += amount; // Add the amount to the current ammo
+    currentAmmo = Mathf.Clamp(currentAmmo, 0, currentWeaponData.maxAmmo); // Prevent exceeding max ammo
+    Debug.Log("Ammo added: " + amount + ". Current ammo: " + currentAmmo);
+}
 
     public void Shoot()
     {
@@ -36,38 +45,42 @@ public class Weapon : MonoBehaviour
             // Calculate the direction from the fire point to the mouse position
             Vector3 shootDirection = (mousePosition - firePoint.position).normalized;
 
-            // Check if the weapon behaves like a shotgun
-            if (weaponDataList[currentWeaponIndex].isShotgun)
-            {
-                // Calculate the angle increment based on the total spread angle
-                float angleIncrement = weaponDataList[currentWeaponIndex].spreadAngle / (weaponDataList[currentWeaponIndex].bulletCount - 1);
-                float startAngle = -weaponDataList[currentWeaponIndex].spreadAngle / 2; // Start from the leftmost angle
+            // Standardize the rotation to face the direction of the mouse
+            float baseAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-                for (int i = 0; i < weaponDataList[currentWeaponIndex].bulletCount; i++)
+            // Check if the weapon behaves like a shotgun
+            if (currentWeaponData.isShotgun)
+            {
+                // Spread shooting logic
+                float angleIncrement = currentWeaponData.spreadAngle / (currentWeaponData.bulletCount - 1);
+                float startAngle = baseAngle - (currentWeaponData.spreadAngle / 2); // Start from the leftmost angle
+
+                for (int i = 0; i < currentWeaponData.bulletCount; i++)
                 {
                     // Calculate the angle for each bullet
-                    float angle = startAngle + (i * angleIncrement);
-
-                    // Create a rotation based on the shoot direction and the calculated angle
-                    Quaternion rotation = Quaternion.Euler(0, 0, angle) * Quaternion.LookRotation(Vector3.forward, shootDirection);
+                    float bulletAngle = startAngle + (i * angleIncrement);
+                    Quaternion bulletRotation = Quaternion.Euler(0, 0, bulletAngle);
 
                     // Instantiate the bullet
-                    GameObject bullet = Instantiate(weaponDataList[currentWeaponIndex].bulletPrefab, firePoint.position, rotation);
+                    GameObject bullet = Instantiate(currentWeaponData.bulletPrefab, firePoint.position, bulletRotation);
                     
-                    // Set bullet properties
+                    // Set bullet properties like damage, range, and size
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
-                    bulletScript.SetProperties(weaponDataList[currentWeaponIndex].bulletDamage, weaponDataList[currentWeaponIndex].bulletRange, weaponDataList[currentWeaponIndex].bulletSize);
+                    bulletScript.SetProperties(currentWeaponData.bulletDamage, currentWeaponData.bulletRange, currentWeaponData.bulletSize);
                 }
             }
             else
             {
                 // Standard single bullet shot
-                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
-                GameObject bullet = Instantiate(weaponDataList[currentWeaponIndex].bulletPrefab, firePoint.position, rotation);
+                Quaternion bulletRotation = Quaternion.Euler(0, 0, baseAngle);
+                GameObject bullet = Instantiate(currentWeaponData.bulletPrefab, firePoint.position, bulletRotation);
+                
+                // Set bullet properties for a standard weapon
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.SetProperties(weaponDataList[currentWeaponIndex].bulletDamage, weaponDataList[currentWeaponIndex].bulletRange, weaponDataList[currentWeaponIndex].bulletSize);
+                bulletScript.SetProperties(currentWeaponData.bulletDamage, currentWeaponData.bulletRange, currentWeaponData.bulletSize);
             }
 
+            // Decrease ammo
             currentAmmo--;
             if (currentAmmo <= 0)
             {
@@ -79,23 +92,17 @@ public class Weapon : MonoBehaviour
     private System.Collections.IEnumerator Reload()
     {
         isReloading = true;
-        yield return new WaitForSeconds(weaponDataList[currentWeaponIndex].reloadSpeed);
-        UpgradeWeapon(); // Switch to the next weapon after reloading
+        yield return new WaitForSeconds(currentWeaponData.reloadSpeed);
+        SelectRandomWeapon(); // Select a random weapon after reload
+        InitializeWeapon();
         isReloading = false;
     }
 
-    void UpgradeWeapon()
+    void SelectRandomWeapon()
     {
-        // Check if there's another weapon to switch to
-        if (currentWeaponIndex < weaponDataList.Count - 1)
-        {
-            currentWeaponIndex++; // Switch to the next weapon
-        }
-        else
-        {
-            currentWeaponIndex = 0; // If at the end, loop back to the first weapon
-        }
-
-        InitializeWeapon(); // Re-initialize ammo for the new weapon
+        // Select a random weapon from the list of available weapons
+        int randomIndex = Random.Range(0, weaponDataList.Count);
+        currentWeaponData = weaponDataList[randomIndex];
     }
+    
 }

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66015191dc3d51840aead18b7c740e2e, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  weaponName: 
-  maxAmmo: 0
-  bulletDamage: 0
-  bulletRange: 0
-  reloadSpeed: 0
-  bulletSize: 0
-  bulletPrefab: {fileID: 0}
-  isShotgun: 0
-  bulletCount: 0
-  spreadAngle: 0
+  weaponName: Shotgun
+  maxAmmo: 20
+  bulletDamage: 3
+  bulletRange: 7
+  reloadSpeed: 1.5
+  bulletSize: 0.05
+  bulletPrefab: {fileID: 7588509016223003162, guid: 0c70b65456a04d4468b12b0853f48e39, type: 3}
+  isShotgun: 1
+  bulletCount: 5
+  spreadAngle: 30

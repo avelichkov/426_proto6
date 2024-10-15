@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66015191dc3d51840aead18b7c740e2e, type: 3}
   m_Name: Bomb
   m_EditorClassIdentifier: 
-  maxAmmo: 0
-  reloadSpeed: 0
-  bulletRange: 0
-  bulletDamage: 0
-  bulletSize: 0
-  bulletCount: 0
+  weaponName: Bomb
+  maxAmmo: 10
+  bulletDamage: 10
+  bulletRange: 5
+  reloadSpeed: 3
+  bulletSize: 0.1
+  bulletPrefab: {fileID: 7588509016223003162, guid: 0c70b65456a04d4468b12b0853f48e39, type: 3}
+  isShotgun: 0
+  bulletCount: 1
   spreadAngle: 0
-  bulletPrefab: {fileID: 0}
