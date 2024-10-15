@@ -781,8 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  currentWeapon: {fileID: 0}
-  firePoint: {fileID: 0}
+  currentWeapon: {fileID: 183360801}
+  firePoint: {fileID: 1983319908}
 --- !u!58 &1258419100
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -845,21 +845,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1258419102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258419096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee25556ff01387048aad116aecd2189e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponDataList:
-  - {fileID: 11400000, guid: 3418e0d99130e774fa4285595a81ee0e, type: 2}
-  firePoint: {fileID: 0}
 --- !u!1 &1383481132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,3 +1343,4 @@ SceneRoots:
   - {fileID: 627001081}
   - {fileID: 176533971}
   - {fileID: 531656916}
+
