@@ -1476,6 +1476,24 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: ShotgunShot
+    clip: {fileID: 8300000, guid: f99159c8ea10e0e4cbf290281064b9ad, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BombShot
+    clip: {fileID: 8300000, guid: a1c8b0ebfdea846438a807ec0e7a0de3, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Reload
+    clip: {fileID: 8300000, guid: 53d43df802a868745919e3bfdd260ade, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1383481134
 Transform:
   m_ObjectHideFlags: 0

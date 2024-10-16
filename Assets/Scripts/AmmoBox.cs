@@ -15,7 +15,7 @@ public class AmmoBox : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player collided with AmmoBox.");
-
+            AudioManager.instance.Play("Reload");
             // Log the names of child objects for debugging
             foreach (Transform child in collision.transform)
             {

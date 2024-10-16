@@ -22,3 +22,4 @@ MonoBehaviour:
   isShotgun: 1
   bulletCount: 5
   spreadAngle: 30
+  sound: ShotgunShot

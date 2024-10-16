@@ -22,3 +22,4 @@ MonoBehaviour:
   isShotgun: 0
   bulletCount: 1
   spreadAngle: 0
+  sound: BombShot
