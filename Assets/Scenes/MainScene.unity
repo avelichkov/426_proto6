@@ -1458,8 +1458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitch: 0
   sounds:
-  - name: Shoot
-    clip: {fileID: 8300000, guid: 36cb0d064a49dbd4eba481aee51d3197, type: 3}
+  - name: PistolShot
+    clip: {fileID: 8300000, guid: 6ee26d8440dd6a4499f0c8ad762454dc, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0

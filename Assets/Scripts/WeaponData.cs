@@ -13,4 +13,5 @@ public class WeaponData : ScriptableObject
     public bool isShotgun; // Indicates if this weapon behaves like a shotgun
     public int bulletCount; // Number of bullets fired for shotgun
     public float spreadAngle; // Angle spread for shotgun pellets
+    public string sound;
 }

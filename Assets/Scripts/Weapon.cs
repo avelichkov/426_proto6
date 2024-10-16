@@ -38,6 +38,7 @@ public class Weapon : MonoBehaviour
     {
         if (CanShoot())
         {
+            AudioManager.instance.Play(currentWeaponData.sound);
             // Get the mouse position in world coordinates
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0; // Set z to 0 for 2D

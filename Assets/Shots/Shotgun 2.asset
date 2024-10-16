@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66015191dc3d51840aead18b7c740e2e, type: 3}
-  m_Name: Pistol
+  m_Name: Shotgun 2
   m_EditorClassIdentifier: 
-  weaponName: Pistol
-  maxAmmo: 30
-  bulletDamage: 1
-  bulletRange: 10
-  reloadSpeed: 1
-  bulletSize: 0.01
-  bulletPrefab: {fileID: 7588509016223003162, guid: 0c70b65456a04d4468b12b0853f48e39, type: 3}
+  weaponName: 
+  maxAmmo: 0
+  bulletDamage: 0
+  bulletRange: 0
+  reloadSpeed: 0
+  bulletSize: 0
+  bulletPrefab: {fileID: 0}
   isShotgun: 0
-  bulletCount: 1
+  bulletCount: 0
   spreadAngle: 0
