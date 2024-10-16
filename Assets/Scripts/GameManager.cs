@@ -10,12 +10,15 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static UIManager UI;
+    public static int score;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            UI = FindObjectOfType<UIManager>();
         }
         else
         {

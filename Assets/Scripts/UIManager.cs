@@ -5,6 +5,8 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI weaponText; // Reference to the TextMesh Pro UI element
     public TextMeshProUGUI ammoText;    // Reference to the ammo TextMesh Pro UI element
+    public TextMeshProUGUI health;
+    public TextMeshProUGUI score;
     private Weapon playerWeapon;         // Reference to the player's Weapon script
     private Transform player;            // Reference to the player's transform
     public Vector3 offset;               // Offset for UI elements from player position
@@ -33,9 +35,14 @@ public class UIManager : MonoBehaviour
     {
         if (playerWeapon != null)
         {
-            weaponText.text = "Weapon: " + playerWeapon.CurrentWeaponName; // Assuming you have a property for the weapon name
-            ammoText.text = "Ammo: " + playerWeapon.CurrentAmmo.ToString(); // Assuming you have a property for current ammo
+            weaponText.text = playerWeapon.CurrentWeaponName; // Assuming you have a property for the weapon name
+            SetAmmoText();
         }
+    }
+
+    public void UpdateScore()
+    {
+        score.text = GameManager.score.ToString();
     }
 
     private void FollowPlayer()
@@ -43,5 +50,27 @@ public class UIManager : MonoBehaviour
         // Update the position of PlayerUI to follow the player
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(player.position + offset);
         transform.position = screenPosition; // Move the UI to the player's position in screen space
+    }
+
+    private void SetAmmoText()
+    {
+        int bullets = playerWeapon.CurrentAmmo;
+        string text = "Ammo:";
+        for (int i = 0; i < bullets; i++)
+        {
+            text += "■";
+        }
+        ammoText.text = text;
+    }
+
+    private void UpdateHealth()
+    {
+        string newText = "";
+        int hp = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().health;
+        for (int i = 0; i < hp; i++)
+        {
+            newText += "♥";
+        }
+        health.text = newText;
     }
 }

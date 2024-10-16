@@ -8,10 +8,19 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D _rb; // Reference to the Rigidbody2D (for 2D games)
     public Weapon currentWeapon;
     public Transform firePoint;
+    public int health;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        //set everything up when game restarts
+        health = 3;
+        GameManager.score = 0;
+        GameManager.UI.UpdateScore();
     }
 
     // Update is called once per frame
@@ -46,6 +55,5 @@ public class PlayerMove : MonoBehaviour
     public void UpgradeWeapon(Weapon newWeapon)
     {
         currentWeapon = newWeapon;
-        
     }
 }
