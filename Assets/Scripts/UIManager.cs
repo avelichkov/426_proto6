@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI ammoText;    // Reference to the ammo TextMesh Pro UI element
     public TextMeshProUGUI health;
     public TextMeshProUGUI score;
+    public GameObject deathDisplay;
     private Weapon playerWeapon;         // Reference to the player's Weapon script
     private Transform player;            // Reference to the player's transform
     public Vector3 offset;               // Offset for UI elements from player position
@@ -42,7 +43,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore()
     {
-        score.text = GameManager.score.ToString();
+        score.text = GameManager.instance.score.ToString();
     }
 
     private void FollowPlayer()
@@ -63,10 +64,9 @@ public class UIManager : MonoBehaviour
         ammoText.text = text;
     }
 
-    private void UpdateHealth()
+    public void UpdateHealth(int hp)
     {
         string newText = "";
-        int hp = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().health;
         for (int i = 0; i < hp; i++)
         {
             newText += "♥";

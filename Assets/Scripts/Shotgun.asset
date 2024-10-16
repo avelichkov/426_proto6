@@ -16,7 +16,7 @@ MonoBehaviour:
   maxAmmo: 20
   bulletDamage: 3
   bulletRange: 7
-  reloadSpeed: 1.5
+  reloadSpeed: 3
   bulletSize: 0.05
   bulletPrefab: {fileID: 7588509016223003162, guid: 0c70b65456a04d4468b12b0853f48e39, type: 3}
   isShotgun: 1

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public static UIManager UI;
-    public static int score;
+    public int score;
 
     void Awake()
     {
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
         {
             QuitGame();
         }
+    }
+
+    public void PlusScore()
+    {
+        score++;
+        UI.UpdateScore();
     }
 
     public void RestartGame()

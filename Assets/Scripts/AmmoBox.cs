@@ -4,6 +4,11 @@ public class AmmoBox : MonoBehaviour
 {
     public int ammoAmount = 10; // Amount of ammo to give
 
+    void Start()
+    {
+        transform.position = GetPosition();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the object that touched the box is the player
@@ -34,5 +39,15 @@ public class AmmoBox : MonoBehaviour
                 Debug.LogWarning("No Weapon component found in the child's Weapon object.");
             }
         }
+    }
+
+    private Vector2 GetPosition()
+    {
+        Vector3 playerPos = GameObject.Find("Player").transform.position;
+        float angle = Random.Range(0f, 2 * Mathf.PI);
+        float radius = 15.0f;
+        float xPos = playerPos.x + Mathf.Cos(angle) * radius;
+        float yPos = playerPos.y + Mathf.Sin(angle) * radius;
+        return new Vector2(xPos, yPos);
     }
 }

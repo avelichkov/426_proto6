@@ -66,7 +66,11 @@ public class Weapon : MonoBehaviour
                     
                     // Set bullet properties like damage, range, and size
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
-                    bulletScript.SetProperties(currentWeaponData.bulletDamage, currentWeaponData.bulletRange, currentWeaponData.bulletSize);
+                    bulletScript.SetProperties(
+                        currentWeaponData.bulletDamage,
+                        currentWeaponData.bulletRange,
+                        currentWeaponData.bulletSize
+                    );
                 }
             }
             else

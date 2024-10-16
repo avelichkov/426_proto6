@@ -4,9 +4,9 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed; // Speed of the bullet
     private Rigidbody2D _rb; // Reference to Rigidbody2D
-    private float _damage; // Damage dealt by the bullet
     private float _range; // Range of the bullet
     private float _size; // Size of the bullet
+    private int _health;
     private Vector3 _startPosition; // Starting position of the bullet
     
 
@@ -28,9 +28,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, _range / speed); // Adjust as needed based on your range and speed
     }
 
-    public void SetProperties(float damage, float range, float size)
+    public void SetProperties(int health, float range, float size)
     {
-        _damage = damage; // Set the damage value
+        _health = health; // Set the damage value
         _range = range; // Set the range value
         _size = size; // Set the size value
 
@@ -61,10 +61,12 @@ public class Bullet : MonoBehaviour
     //     }
     // }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage()
     {
-        // If the bullet had health, reduce it here
-        // For simplicity, we'll just destroy it directly in this case
-        Destroy(gameObject);
+        _health--;
+        if (_health <=0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
